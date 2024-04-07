@@ -18,12 +18,20 @@ pieces=[15, 7, 15, 19, 81, 23, 41]
 k=10
 
 def countPairs(pieces, k):
+    c=0
     # Write your code here
-    n=len(pieces)
-    rows=n
-    cols=n
-    matrix=[[0 for _ in range(cols)] for _ in range(rows)]
-    print(matrix)
+    matrix=[0] *k
+    for i in pieces:
+        matrix[i%k]+=1
+    count=0
+    for j in range(1, k//2+1):
+        _=k-j
+        if j !=_:
+            count+=matrix[j] * matrix[_]
+        else:
+            count+=(matrix[j] * (matrix[j]-1))//2
+    count+=(matrix[0] * (matrix[0]-1))//2
+    return count
 
 
 #if __name__ == '__main__':
